@@ -1,0 +1,16 @@
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <body>
+
+        <div id="new">
+            <p>Title: <input v-model="title" type="text"></p>
+            <p>Author: <input v-model="author" type="text"></p>
+            <p>Password: <input v-model="password" type="text"></p>
+            <p>Content: <input v-model="content" type="text"></p>
+            
+            <button v-on:click="submit">submit</button>
+        </div>
+    </body>
+    <script src="./new.js"></script>
+</html>
