@@ -13,7 +13,7 @@ function parsePath(parse) {
 var id = parsePath(window.location.pathname)
 
 var create = new Vue({
-    el: "#detail",
+    el: "#update",
     data() {
         return {
             entity: null,
