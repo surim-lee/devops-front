@@ -1,0 +1,200 @@
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게 시 판</title>
+
+<style>
+
+	#bbs {
+		width:600px;
+		margin:30px auto;
+		text-align:left;
+	}
+
+	#bbs_title {
+		width:574px;
+		padding-left:20px;
+		height:40px;
+		border:3px solid #D6D4A6;
+		text-align:center;
+		font-weight: bold;
+		line-height:40px;
+		font-size:10pt;
+		margin-bottom:30px;
+	}
+
+	#bbsCreated {
+		width:600px;
+		overflow: visible;
+		border-top:3px solid #DBDBDB;
+		border-bottom:3px solid #DBDBDB;
+		text-align:left;
+	}
+
+	.bbsCreated_bottomLine {
+		height:45px;
+		line-height:35px;
+		border-bottom:1px solid #DBDBDB;
+		clear:both;
+		text-align:left;
+	}
+	.bbsCreated_noLine {
+		height:45px;
+		line-height:35px;
+		clear:both;
+		text-align:left;
+	}
+
+	#bbsCreated_content {
+		height:170px;
+		line-height:170px;
+		border-bottom:1px solid #DBDBDB;
+		clear:both;
+		text-align:left;
+	}
+
+	#bbsCreated dt {
+		float:left;
+		height:35px;
+		width:80px;
+		line-height:35px;
+		text-align:left;
+		padding-left:20px;
+		background-color:#EEEEEE;
+	}
+	#bbsCreated dd {
+		float:left;
+		height:35px;
+		width:440px;
+		line-height:35px;
+		text-align:left;
+		padding-left:10px;
+	}
+
+	#bbsCreated_content dt {
+		float:left;
+		height:170px;
+		width:80px;
+		text-align:left;
+		padding-left:20px;
+		background-color:#EEEEEE;
+	}
+	#bbsCreated_content dd {
+		float:left;
+		height:170px;
+		width:440px;
+		line-height:170px;
+		text-align:left;
+		padding-left:10px;
+	}
+
+	#bbsCreated_footer {
+		width:600px;
+		overflow: visible;
+		clear:both;
+		height:50px;
+		line-height:50px;
+		margin-bottom:20px;
+		text-align:center;
+	}
+
+	.boxTF {
+	border:1px solid;
+	height:32px;
+	margin-top:1px;
+	padding:1px 1px 1px 1px;
+	border-color:#666666;
+	background-color:#ffffff;
+	font-family:"굴림";
+	font-size:7pt;
+	}
+
+	.boxTA {
+	border:1px solid;
+	height:150px;
+	margin-top:2px;
+	padding:2px 2px 2px 2px;
+	border-color:#666666;
+	background-color:#ffffff;
+	font-family:"굴림";
+	font-size:8pt;
+	}
+
+</style>
+<script language="javascript">
+	function showPopup() {window.open("popup.html","삭제 확인","width=400, height=200, left=100, top=50"); }
+</script>
+
+</head>
+
+
+
+<body>
+
+<div id="bbs">
+
+	<div id="bbs_title"	>
+	게 시 판
+	</div>
+
+	<div id="bbsArticle">
+		<div id="bbsArticle_header">
+		${dto.subject }
+		</div>
+
+		<div id="bbsArticle_bottomLine">
+			<dl>
+				<dt>작성자</dt>
+				<dd>${dto.name }</dd>
+				<dt>줄수</dt>
+				<dd>${lineSu }</dd>
+			</dl>
+		</div>
+
+		<div id="bbsArticle_bottomLine">
+			<dl>
+				<dt>등록일</dt>
+				<dd>${dto.created }</dd>
+				<dt>조회수</dt>
+				<dd>${dto.hitCount }</dd>
+			</dl>
+		</div>
+
+		<div id="bbsArticle_content">
+			<table width="600" border="0">
+			<tr>
+				<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
+				${dto.content }
+				</td>
+			</tr>
+			</table>
+		</div>
+	</div>
+
+	<div class="bbsArticle_noLine" style="text-align: right;">
+		From : ${dto.ipAddr }
+	</div>
+
+	<div id ="bbsArticle_footer">
+		<div id="leftFooter">
+			<input type="button" value="수정" class="btn2" onclick="javascript:location.href='<%=cp%>/board.do?method=updated&num=${dto.num }&${params }';"/>
+			<input type="button" value="삭제" class="btn2"
+			onclick="showPopup();" />
+
+			<!-- <input type="button" value="삭제" class="btn2"
+			onclick="var win = window.open(this.href, '_blank', 'width=10px,height=10px,left=600px,top=300px,toolbars=no,scrollbars=no');
+			win.document.write(`<p align = center>삭제?</p>`); return false;" /> -->
+
+		</div>
+
+		<div id="rightFooter">
+			<input type="button" value="리스트" class="btn2" onclick="javascript:location.href='list0.html';">
+		</div>
+	</div>
+
+</div>
+
+
+</body>
+</html>
