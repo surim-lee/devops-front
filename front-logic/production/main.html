@@ -5,8 +5,11 @@
 
         <div id="listAll">
             <ul>
-                <li v-for= "entry in posts">
-                    {{ entry }}
+                <li v-for= "(entry, index) in posts">
+                    <a :href="links[index]">
+                        {{ entry }}
+                        {{ links[index] }}
+                    </a>
                 </li>
             </ul>
         </div>

@@ -9,7 +9,7 @@ function parsePath(parse) {
     }
     return -1
 }
-
+    
 var id = parsePath(window.location.pathname)
 
 var create = new Vue({
