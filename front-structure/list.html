@@ -3,16 +3,17 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>게 시 판</title>
+
 	<style>
 
 	#bbsList {
-		width:690px;
+		width:710px;
 		margin:30px auto;
 		text-align:center;
 	}
 
 	#bbsList_title {
-		width:664px;   /* 690px - (padding-left+border:3px+border:3px) */
+		width:680px;   /* 690px - (padding-left+border:3px+border:3px) */
 		padding-left:20px;
 		height:40px;
 		border:3px solid #D6D4A6;
@@ -38,8 +39,23 @@
 		text-align:right;
 	}
 
-	#bbsList_header .selectField {border:1px solid; border-color:#666666; background-color:#ffffff; font-family:굴림; font-size:9pt;}
-	#bbsList_header .textField{border:1px solid; height:17px; padding:2px 2px 2px 2px; border-color:#666666; background-color:#ffffff; font-family:"굴림"; font-size:9pt;}
+	#bbsList_header .selectField {
+		border:1px solid;
+		border-color:#666666;
+		background-color:#ffffff;
+		font-family:굴림;
+		font-size:9pt;
+	}
+
+	#bbsList_header .textField {
+		border:1px solid;
+		height:17px;
+		padding:2px 2px 2px 2px;
+		border-color:#666666;
+		background-color:#ffffff;
+		font-family:"굴림";
+		font-size:9pt;
+	}
 
 	#bbsList_list {
 		clear:both;
@@ -57,6 +73,7 @@
 		border-top:1px solid #CCCCCC;
 		border-bottom:1px solid #CCCCCC;
 		background-color: #E6E4E6;
+		text-align: center;
 	}
 
 	#bbsList_list #title dl {
@@ -71,109 +88,183 @@
 		text-align:center;
 	}
 
-	#bbsList_list .num {width:50px;}
-	#bbsList_list .subject {width:420px;}
-	#bbsList_list .name {width:90px;}
-	#bbsList_list .created {width:65px;}
+	#bbsList_list .num {width:100px;}
+	#bbsList_list .subject {width:400px;}
+	#bbsList_list .name {width:80px;}
+	#bbsList_list .created {width:100px;}
 	/* #bbsList_list .hitCount {width:60px;} */
 
 	#bbsList_list #lists {
 		clear:both;
+		margin: 0;
+		list-style:none;
+		padding-left:0px;
+	}
+
+	#bbsList_list #lists ul {
+		float:left;
+		margin: 0;
+		padding-left:0px;
+		border-bottom:1px solid #E4E4E4;
 	}
 
 	#bbsList_list #lists dl {
 		float:left;
+		margin: 0;
 		border-bottom:1px solid #E4E4E4;
 	}
 
+	#bbsList_list dd.num {
+		width:100px;
+		margin: 0;
+		text-align:center;
+	}
+
 	#bbsList_list dd.subject {
-		width:410px;
-		margin-left:10px;
+		width:400px;
+		margin: 0;
 		text-align:left;
 	}
+
+	#bbsList_list dd.name {
+		width:80px;
+		margin: 0;
+		text-align:center;
+	}
+
+	#bbsList_list dd.created {
+		width:100px;
+		margin: 0;
+		text-align:center;
+	}
+
 	#bbsList_list a {
 		line-height: 27px;
 	}
 
-	#bbsList_list #footer {
+	/* #bbsList_list #footer {
 		clear:both;
 		height:32px;
 		line-height:32px;
 		margin-top:5px;
 		text-align:center;
+	} */
+
+	nav {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 20px;
+		height: 55px;
+		background: #E4E4E4;
+	}
+
+	nav ul {
+		list-style:none;
+		flex: 1;
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		margin: 0;
+		margin-right: 350px;
+	}
+
+	nav ul li {
+		padding: 0;
+		margin: 0;
+	}
+
+	nav ul li a {
+		padding: 1em;
+		font-size: 0.85em;
+		margin: 0;
+		display: block;
+		text-decoration: none;
+		/* align-items: flex-end; */
 	}
 
 	</style>
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <body>
+	<!-- navigation -->
+	<nav class="sticky_nav">
+		<ul class="blog_menu">
+			<li><a href="list.html">HOME</a></li>
+			<li><a href="created.html">CREATE</a></li>
+		</ul>
+	</nav>
 
-<div id="bbsList">
+	<div id="listAll">
+		<div id="bbsList">
 
-	<div id="bbsList_title">
-	게 시 판
+			<div id="bbsList_title">
+			게 시 판
+			</div>
+
+			<div id="bbsList_header">
+				<div id="leftHeader">
+					<form action="" name="searchForm" method="post">
+						<select name="searchKey" class="selectField">
+							<option value="num">번호</option>
+							<option value="subject">제목</option>
+							<option value="name">작성자</option>
+							<option value="created">작성일</option>
+						</select>
+						<input type="text" name="searchValue" class="textField"/>
+						<input type="button" value="검 색" class="btn2" onclick="searchData();"/> <!-- to be added -->
+					</form>
+				</div>
+				<div id="rightHeader">
+					<input type="button" value="글 올리기" class="btn2" onclick="javascript:location.href='created.html';"/>
+				</div>
+			</div>
+
+			<div id="bbsList_list">
+				<div id="title">
+					<dl>
+						<dt class="num">번호</dt>
+						<dt class="subject">제목</dt>
+						<dt class="name">작성자</dt>
+						<dt class="created">작성일</dt>
+					</dl>
+				</div>
+
+				<div id="lists">
+					<li v-for="(entry, index) in posts">
+						<ul>
+							<dl>
+								<dd class="num">{{ entry.id }}</dd>
+								<dd class="subject">
+									<a :href="links[index]">
+										{{ entry.title }}
+									</a>
+								</dd>
+								<dd class="name">{{ entry.id }}</dd>
+								<dd class="created">2020-01-01</dd>
+							</dl>
+
+							<!-- <div id="footer">
+								<p>
+									<c:if test="${totalDataCount!=0 }">
+										${pageIndexList}
+									</c:if>
+									<div v-if="exists">
+										등록된 게시물이 없습니다.
+									</div>
+								</p>
+							</div> -->
+						</ul>
+					</li>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<div id="bbsList_header">
-		<div id="leftHeader">
-			<form action="" name="searchForm" method="post">
-				<select name="searchKey" class="selectField">
-					<option value="num">번호</option>
-					<option value="subject">제목</option>
-					<option value="name">작성자</option>
-					<option value="created">작성일</option>
-					<option value="content">내용</option>
-				</select>
-				<input type="text" name="searchValue" class="textField"/>
-				<input type="button" value="검 색" class="btn2" onclick="searchData();"/>
-			</form>
-		</div>
-		<div id="rightHeader">
-			<input type="button" value="글 올리기" class="btn2" onclick="javascript:location.href='created0.html';"/>
-		</div>
-	</div>
-
-	<div id="bbsList_list">
-		<div id="title">
-			<dl>
-				<dt class="num">번호</dt>
-				<dt class="subject">제목</dt>
-				<dt class="name">작성자</dt>
-				<dt class="created">작성일</dt>
-				<!-- <dt class="hitCount">조회수</dt> -->
-			</dl>
-		</div>
-
-		<!-- <div id="lists">
-		<c:forEach var="dto" items="${lists }">
-			<dl>
-				<dd class="num">${dto.num}</dd>
-				<dd class="subject">
-					<a href="${urlArticle}&num=${dto.num}">
-						${dto.subject}
-					</a>
-				</dd>
-				<dd class="name">${dto.name}</dd>
-				<dd class="created">${dto.created}</dd>
-				<dd class="hitCount">${dto.hitCount }</dd>
-			</dl>
-		</c:forEach>
-		</div>
-
-		<div id="footer">
-			<p>
-				<c:if test="${totalDataCount!=0 }">
-					${pageIndexList}
-				</c:if>
-				<c:if test="${totalDataCount==0 }">
-					등록된 게시물이 없습니다.
-				</c:if>
-			</p>
-		</div> -->
-
-
-	</div>
-
-</div>
 </body>
+
+<script src="../front-logic/production/main.js"></script>
+
 </html>

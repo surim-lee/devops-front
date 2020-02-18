@@ -24,7 +24,7 @@
 		margin-bottom:30px;
 	}
 
-	#bbsCreated {
+	#bbsArticle {
 		width:600px;
 		overflow: visible;
 		border-top:3px solid #DBDBDB;
@@ -32,21 +32,27 @@
 		text-align:left;
 	}
 
-	.bbsCreated_bottomLine {
+	#bbsArticle_header {
+		text-align: center;
+		height: 30px;
+		margin-top: 5px;
+	}
+
+	.bbsArticle_bottomLine {
 		height:45px;
 		line-height:35px;
 		border-bottom:1px solid #DBDBDB;
 		clear:both;
 		text-align:left;
 	}
-	.bbsCreated_noLine {
+	.bbsArticle_noLine {
 		height:45px;
 		line-height:35px;
 		clear:both;
 		text-align:left;
 	}
 
-	#bbsCreated_content {
+	#bbsArticle_content {
 		height:170px;
 		line-height:170px;
 		border-bottom:1px solid #DBDBDB;
@@ -54,7 +60,7 @@
 		text-align:left;
 	}
 
-	#bbsCreated dt {
+	#bbsArticle dt {
 		float:left;
 		height:35px;
 		width:80px;
@@ -63,7 +69,7 @@
 		padding-left:20px;
 		background-color:#EEEEEE;
 	}
-	#bbsCreated dd {
+	#bbsArticle dd {
 		float:left;
 		height:35px;
 		width:440px;
@@ -72,7 +78,7 @@
 		padding-left:10px;
 	}
 
-	#bbsCreated_content dt {
+	#bbsArticle_content dt {
 		float:left;
 		height:170px;
 		width:80px;
@@ -80,7 +86,7 @@
 		padding-left:20px;
 		background-color:#EEEEEE;
 	}
-	#bbsCreated_content dd {
+	#bbsArticle_content dd {
 		float:left;
 		height:170px;
 		width:440px;
@@ -89,7 +95,8 @@
 		padding-left:10px;
 	}
 
-	#bbsCreated_footer {
+
+	#bbsArticle_footer {
 		width:600px;
 		overflow: visible;
 		clear:both;
@@ -121,80 +128,120 @@
 	font-size:8pt;
 	}
 
+
+		nav {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 20px;
+			height: 55px;
+			background: #E4E4E4;
+		}
+
+		nav ul {
+			list-style:none;
+			flex: 1;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			margin: 0;
+			margin-right: 350px;
+		}
+
+		nav ul li {
+			padding: 0;
+			margin: 0;
+		}
+
+		nav ul li a {
+			padding: 1em;
+			font-size: 0.85em;
+			margin: 0;
+			display: block;
+			text-decoration: none;
+			/* align-items: flex-end; */
+		}
+
 </style>
 <script language="javascript">
-	function showPopup() {window.open("popup.html","삭제 확인","width=400, height=200, left=100, top=50"); }
+	function move(url) {
+		location.href=url;
+	}
+	function boardDeletecheck() {
+		var form = document.boardDeleteForm;
+		return true;
+	}
+
 </script>
 
 </head>
 
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 
 <body>
 
-<div id="bbs">
+	<!-- navigation -->
+	<nav class="sticky_nav">
+		<ul class="blog_menu">
+			<li><a href="list.html">HOME</a></li>
+			<li><a href="created.html">CREATE</a></li>
+		</ul>
+	</nav>
 
-	<div id="bbs_title"	>
-	게 시 판
+<div id="listAll">
+
+	<div id="bbs">
+
+		<div id="bbs_title"	>
+		게 시 판
+		</div>
+
+		<div id="bbsArticle">
+			<div id="bbsArticle_header">
+			${dto.subject }
+			</div>
+
+			<div id="bbsArticle_bottomLine">
+				<dl>
+					<dt>작&nbsp;성&nbsp;자</dt>
+					<dd>${dto.name }</dd>
+					<dt>등&nbsp;록&nbsp;일</dt>
+					<dd>${dto.created }</dd>
+					<dt>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</dt>
+				</dl>
+			</div>
+
+			<div id="bbsArticle_content">
+				<table width="600" border="0">
+				<tr>
+					<td style="padding:10px;" valign="top" height="150">
+					${dto.content }
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+
+		<div id ="bbsArticle_footer">
+			<div id="leftFooter">
+				<input type="button" value="수정" class="btn2" onclick="javascript:location.href='ㅇㅇㅇㅇㅇㅇ';"/>
+				<input type="button" value="삭제" class="btn2" onclick="javascript:location.href='popup.html';" />
+
+				<!-- 비밀번호 없을 경우-->
+				<!-- <input type="button" value="삭제하기" onclick="button_event();"> -->
+
+				<!-- <input type="button" value="삭제" class="btn2"
+				onclick="var win = window.open(this.href, '_blank', 'width=10px,height=10px,left=600px,top=300px,toolbars=no,scrollbars=no');
+				win.document.write(`<p align = center>삭제?</p>`); return false;" /> -->
+				<input type="button" value="리스트" class="btn2" onclick="javascript:location.href='list.html';">
+			</div>
+		</div>
+
 	</div>
-
-	<div id="bbsArticle">
-		<div id="bbsArticle_header">
-		${dto.subject }
-		</div>
-
-		<div id="bbsArticle_bottomLine">
-			<dl>
-				<dt>작성자</dt>
-				<dd>${dto.name }</dd>
-				<dt>줄수</dt>
-				<dd>${lineSu }</dd>
-			</dl>
-		</div>
-
-		<div id="bbsArticle_bottomLine">
-			<dl>
-				<dt>등록일</dt>
-				<dd>${dto.created }</dd>
-				<dt>조회수</dt>
-				<dd>${dto.hitCount }</dd>
-			</dl>
-		</div>
-
-		<div id="bbsArticle_content">
-			<table width="600" border="0">
-			<tr>
-				<td style="padding: 20px 80px 20px 62px;" valign="top" height="200">
-				${dto.content }
-				</td>
-			</tr>
-			</table>
-		</div>
-	</div>
-
-	<div class="bbsArticle_noLine" style="text-align: right;">
-		From : ${dto.ipAddr }
-	</div>
-
-	<div id ="bbsArticle_footer">
-		<div id="leftFooter">
-			<input type="button" value="수정" class="btn2" onclick="javascript:location.href='<%=cp%>/board.do?method=updated&num=${dto.num }&${params }';"/>
-			<input type="button" value="삭제" class="btn2"
-			onclick="showPopup();" />
-
-			<!-- <input type="button" value="삭제" class="btn2"
-			onclick="var win = window.open(this.href, '_blank', 'width=10px,height=10px,left=600px,top=300px,toolbars=no,scrollbars=no');
-			win.document.write(`<p align = center>삭제?</p>`); return false;" /> -->
-
-		</div>
-
-		<div id="rightFooter">
-			<input type="button" value="리스트" class="btn2" onclick="javascript:location.href='list0.html';">
-		</div>
-	</div>
-
 </div>
 
-
 </body>
+
 </html>

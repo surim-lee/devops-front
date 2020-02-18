@@ -2,16 +2,98 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>게 시 판</title>
+<title>삭제</title>
+	<style>
+
+	#title {
+		float:left;
+		height:50px;
+		width:380px;
+		text-align:center;
+		padding-left:0;
+		padding-top: 30px;
+		/* background-color:#EEEEEE; */
+	}
+
+	.popup_password dl {
+		width: 100px;
+		margin: 0;
+	}
+
+	.popup_password {
+		float:left;
+		height:30px;
+		width:100px;
+		text-align:center;
+		padding-left:0;
+		/* background-color:#EEEEEE; */
+	}
+
+	.popup_password dd {
+		float:left;
+		height:30px;
+		width:100px;
+		text-align:center;
+		margin: 0;
+		padding-left:0;
+		background-color:#EEEEEE;
+	}
+
+	.boxTF {
+		border:1px solid;
+		height:30px;
+		margin-left: 100px;
+		margin-top:0;
+		border-color:#666666;
+		background-color:#ffffff;
+		font-family:"굴림";
+		font-size:8pt;
+	}
+
+	.btn2 {
+		margin-left: 25px;
+	  margin-top: 60px;
+	}
+
+	</style>
+
 
 <body>
+	<center>
+		<br /><br />
+		<table width=50% cellspacing=0 cellpadding=3>
+			<tr>
+				<td bgcolor=#dcdcdc height=21 align=center>
+					작성자의 비밀번호를 입력해주세요.</td>
+				</td>
+			</tr>
+		</table>
 
-	<div id ="bbsArticle_footer">
-		<div id="leftFooter">
-			<input type="button" value="확인" class="btn2" onclick="window.close();"/>
-			<input type="button" value="취소" class="btn2" onclick="window.close();"/>
-		</div>
-	</div>
+		<table width=70% cellspacing=0 cellpadding=2>
+			<form name="boardDeleteForm" method="post" onsubmit="return boardDeletecheck();">
+				<tr>
+					<td align=center>
+					<table align=center border=0 width=91%>
+						<tr>
+							<td align=center>
+								<input type=password name="password" size=17 maxlength=15 />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<hr size=1 color=#eeeeee />
+							</td>
+						</tr>
+						<tr>
+							<td align=center>
+							<input type="submit" value="삭제" />
+							<input type=button value="취소" onclick="history.go(-1)" />
+						</tr>
+					</table>
+					</td>
+				</tr>
+			</form>
+	</center>
 
 </body>
 </html>
